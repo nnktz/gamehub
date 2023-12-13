@@ -7,6 +7,7 @@ import { useSidebar } from '@/store/use-sidebar'
 
 import { ToggleSkeleton } from './toggle'
 import { RecommendedSkeleton } from './recommended'
+import { FollowingSkeleton } from './following'
 
 export const Wrapper = ({ children }: { children: React.ReactNode }) => {
   const isClient = useIsClient()
@@ -22,6 +23,7 @@ export const Wrapper = ({ children }: { children: React.ReactNode }) => {
         )}
       >
         <ToggleSkeleton />
+        <FollowingSkeleton />
         <RecommendedSkeleton />
       </aside>
     )
