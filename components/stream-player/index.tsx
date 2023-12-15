@@ -7,8 +7,8 @@ import { useViewerToken } from '@/hooks/use-viewer-token'
 import { useChatSidebar } from '@/store/use-chat-sidebar'
 import { cn } from '@/lib/utils'
 
-import { Video } from './video'
-import { Chat } from './chat'
+import { Video, VideoSkeleton } from './video'
+import { Chat, ChatSkeleton } from './chat'
 import { ChatToggle } from './chat-toggle'
 
 interface StreamPlayerProps {
@@ -22,7 +22,7 @@ export const StreamPlayer = ({ user, stream, isFollowing }: StreamPlayerProps) =
   const { collapsed } = useChatSidebar((state) => state)
 
   if (!token || !identity || !name) {
-    return <div>hi</div>
+    return <StreamPlayerSkeleton />
   }
 
   return (
@@ -58,5 +58,19 @@ export const StreamPlayer = ({ user, stream, isFollowing }: StreamPlayerProps) =
         </div>
       </LiveKitRoom>
     </>
+  )
+}
+
+export const StreamPlayerSkeleton = () => {
+  return (
+    <div className="grid h-full grid-cols-1 lg:grid-cols-3 lg:gap-y-0 xl:grid-cols-3 2xl:grid-cols-6">
+      <div className="hidden-scrollbar col-span-1 space-y-4 pb-10 lg:col-span-2 lg:overflow-y-auto xl:col-span-2 2xl:col-span-5">
+        <VideoSkeleton />
+      </div>
+
+      <div className="col-span-1 bg-background">
+        <ChatSkeleton />
+      </div>
+    </div>
   )
 }
