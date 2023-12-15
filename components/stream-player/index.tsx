@@ -11,6 +11,7 @@ import { Video, VideoSkeleton } from './video'
 import { Chat, ChatSkeleton } from './chat'
 import { ChatToggle } from './chat-toggle'
 import { Header, HeaderSkeleton } from './header'
+import { InfoCard } from './info-card'
 
 interface StreamPlayerProps {
   user: User & { stream: Stream | null }
@@ -44,6 +45,7 @@ export const StreamPlayer = ({ user, stream, isFollowing }: StreamPlayerProps) =
       >
         <div className="hidden-scrollbar col-span-1 space-y-4 pb-10 lg:col-span-2 lg:overflow-y-auto xl:col-span-2 2xl:col-span-5">
           <Video hostName={user.username} hostIdentity={user.id} />
+
           <Header
             hostName={user.username}
             hostIdentity={user.id}
@@ -51,6 +53,13 @@ export const StreamPlayer = ({ user, stream, isFollowing }: StreamPlayerProps) =
             imageUrl={user.imageUrl}
             isFollowing={isFollowing}
             name={stream.name}
+          />
+
+          <InfoCard
+            hostIdentity={user.id}
+            viewerIdentity={identity}
+            name={stream.name}
+            thumbnailUrl={stream.thumbnailUrl}
           />
         </div>
 
