@@ -57,7 +57,6 @@ export const Chat = ({
     if (!send) {
       return
     }
-
     send(value)
     setValue('')
   }

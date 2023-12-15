@@ -37,20 +37,18 @@ export const ChatForm = ({
     e.preventDefault()
     e.stopPropagation()
 
-    if (!value || isDisabled) {
-      return
-    }
+    if (!value || isDisabled) return
 
     if (isChatDelay && !isDelayBlocked) {
       setIsDelayBlocked(true)
       setTimeout(() => {
         setIsDelayBlocked(false)
+        onSubmit()
       }, 3000)
     } else {
       onSubmit()
     }
   }
-
   if (isHidden) {
     return null
   }
@@ -65,7 +63,10 @@ export const ChatForm = ({
           value={value}
           disabled={isDisabled}
           placeholder="Send a message"
-          className={cn('border-white/10', isChatFollowersOnly && 'rounded-t-none border-t-0')}
+          className={cn(
+            'border-white/10',
+            isChatFollowersOnly || (isChatDelay && 'rounded-t-none border-t-0'),
+          )}
         />
       </div>
 
