@@ -1,12 +1,23 @@
 import Link from 'next/link'
-import { Stream, User } from '@prisma/client'
 import { formatDistanceToNow } from 'date-fns'
+import { User } from '@prisma/client'
 
 import { Thumbnail, ThumbnailSkeleton } from '@/components/thumbnail'
 import { Skeleton } from '@/components/ui/skeleton'
 import { VerifiedMark } from '@/components/verified-mark'
 
-export const ResultCard = ({ data }: { data: Stream & { user: User } }) => {
+export const ResultCard = ({
+  data,
+}: {
+  data: {
+    id: string
+    name: string
+    thumbnailUrl: string | null
+    isLive: boolean
+    updatedAt: Date
+    user: User
+  }
+}) => {
   return (
     <Link href={`/${data.user.username}`}>
       <div className="flex w-full gap-x-4">
